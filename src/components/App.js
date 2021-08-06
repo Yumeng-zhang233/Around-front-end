@@ -27,12 +27,10 @@ function App() {
         }
     };
     return (
-    <div className="App">
-     <TopBar isLoggedIn={isLoggedIn}
-             handleLogout={logout}/>
-        <Main />
-    </div>
-  );
+        <div className="App">
+            <TopBar isLoggedIn={isLoggedIn} handleLogout={logout} />
+            <Main isLoggedIn={isLoggedIn} handleLoggedIn={loggedIn} />
+        </div>
+    );
 }
-
 export default App;
