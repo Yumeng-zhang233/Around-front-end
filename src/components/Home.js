@@ -15,16 +15,24 @@ function Home(props) {
         type: SEARCH_KEY.all,
         keyword: ""
     });
-
+    //how to get posts from the server
+    //didMount + didUpdate
     useEffect(() => {
+        //do search the first time => didMount => search:{type:all, value: ")
+        //after the first time => didUpdate => search :{type: keyword/user, value:keyword}
         const { type, keyword } = searchOption;
         fetchPost(searchOption);
     }, [searchOption]);
 
     const fetchPost = (option) => {
+        //get search option
+        //make a request to the server to fetch
         const { type, keyword } = option;
+        //define url
         let url = "";
-
+        //all
+        //keyword
+        //user
         if (type === SEARCH_KEY.all) {
             url = `${BASE_URL}/search`;
         } else if (type === SEARCH_KEY.user) {
@@ -32,7 +40,7 @@ function Home(props) {
         } else {
             url = `${BASE_URL}/search?keywords=${keyword}`;
         }
-
+        // config opt for axios request
         const opt = {
             method: "GET",
             url: url,
@@ -40,7 +48,7 @@ function Home(props) {
                 Authorization: `Bearer ${localStorage.getItem(TOKEN_KEY)}`
             }
         };
-
+        //send request: if  success, print res; if fail: print message
         axios(opt)
             .then((res) => {
                 if (res.status === 200) {
@@ -54,6 +62,8 @@ function Home(props) {
     };
 
     const renderPosts = (type) => {
+        //case1: type = image
+        //case2: type = video
         if (!posts || posts.length === 0) {
             return <div>No data!</div>;
         }
