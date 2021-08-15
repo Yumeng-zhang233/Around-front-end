@@ -17,13 +17,14 @@ function SearchBar(props) {
 
     const handleSearch = (value) => {
         //step1: display error message
-        //  search type !== all && value ===""
+        // - search type !== all && value ===""
         //step2:clear error
         if (searchType !== SEARCH_KEY.all && value === "") {
             setError("Please input your search keyword!");
             return;
         }
         setError("");
+        props.handleSearch({type: searchType,keyword:value})
     };
 
     return (

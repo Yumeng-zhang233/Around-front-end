@@ -4,6 +4,7 @@ import axios from "axios";
 
 import SearchBar from "./SearchBar";
 import PhotoGallery from "./PhotoGallery";
+import CreatePostButton from "./CreatePostButton";
 import { SEARCH_KEY, BASE_URL, TOKEN_KEY } from "../constants";
 
 const { TabPane } = Tabs;
@@ -15,6 +16,11 @@ function Home(props) {
         type: SEARCH_KEY.all,
         keyword: ""
     });
+    const handleSearch = (option) => {
+        const { type, keyword } = option;
+        setSearchOption({ type: type, keyword: keyword });
+    };
+
     //how to get posts from the server
     //didMount + didUpdate
     useEffect(() => {
@@ -68,18 +74,47 @@ function Home(props) {
             return <div>No data!</div>;
         }
         if (type === "image") {
-            console.log("images -> ", posts);
-            return "images";
+            //prepare image data
+            const imageArr = posts
+                .filter((item) => item.type === "image")
+                .map((image) => {
+                    return {
+                        postId: image.id,
+                        src: image.url,
+                        user: image.user,
+                        //title
+                        caption: image.message,
+                        thumbnail: image.url,
+                        thumbnailWidth: 300,
+                        thumbnailHeight: 200
+                    };
+                });
+            return <PhotoGallery images={imageArr} />;
         } else if (type === "video") {
             console.log("video -> ", posts);
-            return "videos";
+            return (
+                <Row gutter={32}>
+                    {
+                        posts
+                        .filter((post) => post.type === "video")
+                        .map((post) => (
+                            //一行显示3个video
+                            <Col span={8} key={post.url}>
+                                <video src={post.url} controls={true} className="video-block" />
+                                <p>
+                                    {post.user}: {post.message}
+                                </p>
+                            </Col>
+                        ))}
+                </Row>
+            );
         }
     };
 
-    const operations = <Button>Upload</Button>;
+    const operations = <CreatePostButton />;
     return (
         <div className="home">
-            <SearchBar />
+            <SearchBar handleSearch={handleSearch}/>
             <div className="display">
                 <Tabs
                     onChange={(key) => setActiveTab(key)}
