@@ -2,6 +2,7 @@ import React, { Component, createRef } from "react";
 import { Modal, Button, message } from "antd";
 import axios from "axios";
 
+import { PostForm } from "./PostForm";
 import { BASE_URL, TOKEN_KEY } from "../constants";
 
 class CreatePostButton extends Component {
@@ -16,7 +17,11 @@ class CreatePostButton extends Component {
         });
     };
 
+
     handleOk = () => {
+        //step1: display loading
+        //step2: collect post information: message + images/videps
+        //step3: sent messages to server
         this.setState({
             confirmLoading: true
         });
@@ -86,10 +91,11 @@ class CreatePostButton extends Component {
                     confirmLoading={confirmLoading}
                     onCancel={this.handleCancel}
                 >
-                    post form
+                    <PostForm ref={(refInstance) => (this.postForm = refInstance)} />
                 </Modal>
             </div>
         );
     }
 }
+
 export default CreatePostButton;
