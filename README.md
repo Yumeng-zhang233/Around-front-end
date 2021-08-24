@@ -10,4 +10,6 @@ Frontend：
 
 ![image](https://github.com/Yumeng-zhang233/Around-front-end/blob/master/img-readme/Screen%20Shot%202021-08-23%20at%205.55.54%20PM.png)
 
+![image](https://github.com/Yumeng-zhang233/Around-front-end/blob/master/img-readme/Screen%20Shot%202021-08-23%20at%205.52.12%20PM.png)
+
 
