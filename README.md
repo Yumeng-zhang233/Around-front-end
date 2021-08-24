@@ -7,4 +7,4 @@ Frontend：
 *Implemented features for users to create and browse posts and support search nearby posts.
 
 *Improved the authentication using token based registration/login/logout flow with React Router v4 and server-side user authentication with JWT. 
-
+https://github.com/Yumeng-zhang233/Around-front-end/blob/master/img-readme/Screen%20Shot%202021-08-23%20at%205.52.12%20PM.png
